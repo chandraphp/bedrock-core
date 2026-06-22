@@ -18,3 +18,11 @@ count, and neither does this document's own confidence.
 | `app.agent()` is understandable without explanation | — | Pending — Study 1 |
 | TTFS < 5 min for first successful `agent.ask()` | — | Pending — Study 1 |
 | Mock → real provider swap is clear | — | Pending — Study 2 (not started) |
+
+## Commit History
+
+Auto-updated on every push to main. Newest commits at the top.
+
+| Commit | Date | Author | Message | Files Changed |
+| --- | --- | --- | --- | --- |
+| `28ad084` | 2026-06-22 | Chandu | Add feedback tracker — connects observations to decisions | docs/validation/feedback-tracker.md |
