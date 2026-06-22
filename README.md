@@ -13,7 +13,7 @@ public API that has to work before any other feature is built.
 
 ```bash
 pip install -e ".[dev]"
-python examples/hello_world.py
+python3 examples/hello_world.py
 ```
 
 ```python

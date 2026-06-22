@@ -2,7 +2,7 @@
 Quick Start.
 
 Run with:
-    python examples/hello_world.py
+    python3 examples/hello_world.py
 
 Uses the built-in mock provider — no API key, no network access required.
 Swap provider="mock" for provider="anthropic" (with ANTHROPIC_API_KEY set and
