@@ -1,9 +1,15 @@
 # bedrock-core (placeholder name)
 
-> **Naming notice:** `bedrock-core` is a working name only. Per ADR-003, no
-> branding is finalized until PyPI, the GitHub organization, the relevant
-> domains, and trademark are all checked. Do not build tooling or docs that
-> assume this name is permanent.
+[![CI](https://github.com/chandraphp/bedrock-core/actions/workflows/ci.yml/badge.svg)](https://github.com/chandraphp/bedrock-core/actions/workflows/ci.yml)
+[![Python](https://img.shields.io/badge/python-3.10%20%7C%203.11%20%7C%203.12-blue)](https://pypi.org/project/bedrock-core/)
+[![License](https://img.shields.io/badge/license-Apache%202.0-green)](LICENSE)
+[![Checked with mypy](https://img.shields.io/badge/mypy-checked-blue)](https://mypy-lang.org/)
+[![Code style: ruff](https://img.shields.io/badge/code%20style-ruff-000000)](https://github.com/astral-sh/ruff)
+[![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen)](CONTRIBUTING.md)
+
+> **Naming notice:** `bedrock-core` is a working codename only. Per ADR-003, no
+> branding is finalized until PyPI, GitHub org, domain, and trademark are all
+> checked. Do not build tooling or docs that assume this name is permanent.
 
 A small, production-minded runtime for AI agents. This repository is the
 **Proof of Engineering** slice for Sprint 0 — the smallest version of the

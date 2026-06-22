@@ -26,10 +26,15 @@ def _resolve_provider(provider: Union[str, Adapter], **kwargs: Any) -> Adapter:
 
         return OpenAIProvider(**kwargs)
 
+    if provider == "ollama":
+        from .providers.ollama import OllamaProvider
+
+        return OllamaProvider(**kwargs)
+
     if provider in _BUILTIN_PROVIDERS:
         return _BUILTIN_PROVIDERS[provider](**kwargs)
 
-    known = list(_BUILTIN_PROVIDERS) + ["anthropic", "openai"]
+    known = list(_BUILTIN_PROVIDERS) + ["anthropic", "openai", "ollama"]
     raise ValueError(f"Unknown provider '{provider}'. Known providers: {known}")
 
 

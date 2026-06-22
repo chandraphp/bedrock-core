@@ -25,4 +25,6 @@ Auto-updated on every push to main. Newest commits at the top.
 
 | Commit | Date | Author | Message | Files Changed |
 | --- | --- | --- | --- | --- |
+| `6297657` | 2026-06-22 | Chandu | Add OllamaProvider: local/on-prem LLM support, zero API key | docs/decisions/evidence-log.md, examples/local_models.py, src/bedrock_core/app.py, src/bedrock_core/providers/ollama.py, tests/test_ollama.py |
+| `9045dd1` | 2026-06-22 | Chandu | Add auto-update Evidence Log workflow + script | .github/workflows/update-evidence-log.yml, docs/decisions/evidence-log.md, scripts/update_evidence_log.py |
 | `28ad084` | 2026-06-22 | Chandu | Add feedback tracker — connects observations to decisions | docs/validation/feedback-tracker.md |
