@@ -44,13 +44,24 @@ def test_public_api_surface_is_frozen():
     import bedrock_core
 
     expected = {
+        # Public sugar API
         "App",
         "Agent",
+        "LifecycleApp",
+        # Core primitives
         "Runtime",
         "ExecutionResult",
         "Adapter",
         "Capability",
         "ChatCapability",
+        # Extension points
+        "Connector",
+        "ConnectorError",
+        # Configuration
+        "BaseConfig",
+        "ConnectorConfig",
+        "ConfigurationError",
+        "LLMConfig",
     }
     assert set(bedrock_core.__all__) == expected
 

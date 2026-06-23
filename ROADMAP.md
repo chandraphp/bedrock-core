@@ -1,71 +1,108 @@
 # Roadmap
 
 This roadmap is evidence-gated. A phase doesn't start until the previous
-phase has been externally validated. We do not add scope to satisfy a roadmap;
-we update the roadmap to reflect what evidence tells us to build next.
+phase has been externally validated. Scope is set by user study findings,
+not internal assumptions.
+
+See [ADR-005](docs/adr/ADR-005-framework-application-separation.md) for
+the framework / application separation decision.
 
 ---
 
-## ✅ Sprint 0 — Foundation (complete)
+## Two repositories, one ecosystem
 
-**Goal:** can a minimal AI runtime provide a clean public API while hiding a
-composable internal architecture?
+```
+bedrock-core          ← you are here
+    domain-agnostic AI runtime
 
-**Exit criteria met:**
-- Public API (`App → agent() → ask()`) works offline in under 5 minutes
-- `Runtime → Capability → Adapter` layering enforced by fitness tests
-- Three providers validated (Mock, Anthropic, OpenAI, Ollama) with zero
-  core changes — provider interface considered stable
-- CI green on Python 3.10–3.12
+nb-ops-brain          ← coming next
+    SRE application built on bedrock-core
+    Splunk · Dynatrace · Jira · Teams · Slack · Kubernetes · RCA
+```
 
 ---
 
-## 🔄 Validation — Study 1 (in progress)
+## bedrock-core roadmap
 
-**Goal:** does an engineer who didn't build this understand and use it
-without help?
+### ✅ Sprint 0 — Foundation (complete)
 
-**Exit criteria:**
+- Public API: `App → agent() → ask()`
+- Internal `Runtime → Capability → Adapter` architecture
+- Providers: Mock, Anthropic, OpenAI, Ollama (local/on-prem)
+- Architecture fitness tests + CI on Python 3.10–3.12
+- Evidence Log, Feedback Tracker, User Study instrument
+
+### 🔄 Study 1 — External validation (in progress)
+
+Exit criteria before Sprint 1 starts:
 - ≥ 3 independent engineers complete the Quick Start
-- ≥ 2 complete it without any assistance
+- ≥ 2 complete without assistance
 - Average TTFS < 10 minutes
-- No critical installation failures
-- Public API unchanged after review, or changes backed by documented evidence
+- No critical install failures
+- Public API unchanged, or changes backed by documented evidence
 
-See `docs/validation/first-user-study.md` for the session script.
+### ⏳ Sprint 1 — From "Hello World" to "Useful"
 
----
+_Scope set by Study 1 findings. Current candidates:_
 
-## ⏳ Sprint 1 — From "Hello World" to "Useful" (pending Study 1)
-
-Scope will be set by Study 1 findings. Current candidates (subject to change):
-
-- Structured logging on every execution (request ID, duration, provider, tokens, cost)
-- Unified exception hierarchy (no provider-specific exceptions leaking)
+- Structured logging (request ID, duration, provider, tokens, cost)
+- Unified exception hierarchy — no provider-specific exceptions leak
 - Configuration loading (`BEDROCK_PROVIDER`, `BEDROCK_MODEL` env vars)
-- Plugin interface — design only after ≥ 1 real plugin is implemented
+- Plugin interface — after ≥ 1 real plugin is built and tested
 - Study 2: provider-swap UX validation (mock → real provider)
 
+### ⏳ Sprint 2 — Plugin system
+
+- Plugin interface freeze (after ≥ 3 plugin types validated)
+- Logging plugin
+- Reference enterprise plugin
+
+### ⏳ Sprint 3 — RAG framework
+
+- Vector store adapter interface
+- Retrieval capability
+- Chunking and embedding pipeline
+- Citation support on ExecutionResult
+
+### ⏳ Sprint 4 — Agent orchestration
+
+- Multi-step agent loop
+- Tool use capability
+- Memory interface
+
+### ⏳ Sprint 5 — Evaluation & observability
+
+- Built-in eval harness
+- Benchmark runner
+- Structured trace export (OpenTelemetry)
+
+### ⏳ Sprint 6 — Stable v1.0
+
+- Final package name (pending PyPI/GitHub/domain/trademark)
+- Public PyPI release
+- LTS policy
+
 ---
 
-## 🔮 Future (unscheduled — requires evidence)
+## nb-ops-brain roadmap (separate repo)
 
-These are candidates, not commitments. Each requires a user study or
-issue evidence before entering a sprint.
-
-| Feature | Waiting for |
+| Sprint | Focus |
 |---|---|
-| Plugin interface freeze | ≥ 3 plugin types implemented |
-| Memory / RAG | Sprint 1 complete + Study 2 |
-| MCP integration | Plugin interface stable |
-| Workflow orchestration | Memory + MCP stable |
-| Final package name + PyPI publish | PyPI/GitHub/domain/trademark check |
-| Studio / Hub UI | Core framework mature |
+| 1 | Splunk ingestion → embeddings → vector store |
+| 2 | RAG with citations |
+| 3 | LLM-powered Root Cause Analysis |
+| 4 | Anomaly detection and incident correlation |
+| 5 | ChatOps: Jira, Microsoft Teams, Slack |
+| 6 | Evaluation, benchmarking, AI observability |
+
+nb-ops-brain depends on bedrock-core as a library. It will not patch or
+fork the framework — if it needs something the framework doesn't have,
+that becomes a bedrock-core Sprint N candidate backed by real evidence.
 
 ---
 
-## What we will not build (deliberately)
+## What we will not build in bedrock-core
 
-- A "batteries included" framework that hides operational behaviour
-- Provider lock-in of any kind
+- Domain-specific logic (SRE, finance, legal, etc.)
+- A UI / Studio (third-party apps or nb-ops-brain can build this)
 - Features without a documented observation justifying them

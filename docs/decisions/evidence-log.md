@@ -25,6 +25,11 @@ Auto-updated on every push to main. Newest commits at the top.
 
 | Commit | Date | Author | Message | Files Changed |
 | --- | --- | --- | --- | --- |
+| `e6a90cd` | 2026-06-23 | Chandu | Resolve GAP-001, GAP-002, GAP-005: Connector, LifecycleApp, Config | docs/decisions/evidence-log.md, src/bedrock_core/__init__.py, src/bedrock_core/config.py, src/bedrock_core/connector.py, src/bedrock_core/lifecycle.py, tests/test_architecture.py |
+| `dad4bbc` | 2026-06-23 | Chandu | Add ADR-005 CI gate: cross-repo compatibility check against nb-ops-brain | .github/workflows/adr005-gate.yml, docs/decisions/evidence-log.md |
+| `8aa08e4` | 2026-06-23 | Chandu | ADR-005: framework/application separation; update roadmap + CodeQL | .github/workflows/codeql.yml, ROADMAP.md, docs/adr/ADR-005-framework-application-separation.md, docs/decisions/evidence-log.md |
+| `9e79300` | 2026-06-23 | Chandu | Update README to professional OSS standard; add CodeQL | .github/workflows/codeql.yml, .gitignore, README.md, docs/decisions/evidence-log.md |
+| `26cceef` | 2026-06-22 | Chandu | Add community health files and repo credibility layer | .github/ISSUE_TEMPLATE/bug_report.md, .github/ISSUE_TEMPLATE/documentation.md, .github/ISSUE_TEMPLATE/feature_request.md, .github/PULL_REQUEST_TEMPLATE/pull_request_template.md, .github/dependabot.yml, CHANGELOG.md, CODE_OF_CONDUCT.md, CONTRIBUTING.md, README.md, ROADMAP.md, SECURITY.md, docs/decisions/evidence-log.md |
 | `6297657` | 2026-06-22 | Chandu | Add OllamaProvider: local/on-prem LLM support, zero API key | docs/decisions/evidence-log.md, examples/local_models.py, src/bedrock_core/app.py, src/bedrock_core/providers/ollama.py, tests/test_ollama.py |
 | `9045dd1` | 2026-06-22 | Chandu | Add auto-update Evidence Log workflow + script | .github/workflows/update-evidence-log.yml, docs/decisions/evidence-log.md, scripts/update_evidence_log.py |
 | `28ad084` | 2026-06-22 | Chandu | Add feedback tracker — connects observations to decisions | docs/validation/feedback-tracker.md |
