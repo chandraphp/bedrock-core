@@ -12,7 +12,7 @@
 >
 > A permanent name will be announced before the first stable release.
 
-[![CI](https://github.com/chandraphp/bedrock-core/actions/workflows/ci.yml/badge.svg)](https://github.com/chandraphp/bedrock-core/actions/workflows/ci.yml)
+[![CI](https://github.com/chandraphp/bedrock-core/actions/workflows/CI/badge.svg)](https://github.com/chandraphp/bedrock-core/actions/workflows/ci.yml)
 [![CodeQL](https://github.com/chandraphp/bedrock-core/actions/workflows/codeql.yml/badge.svg)](https://github.com/chandraphp/bedrock-core/actions/workflows/codeql.yml)
 [![Python](https://img.shields.io/badge/python-3.11+-blue)](https://pypi.org/project/bedrock-core/)
 [![License](https://img.shields.io/badge/license-Apache%202.0-blue)](LICENSE)
