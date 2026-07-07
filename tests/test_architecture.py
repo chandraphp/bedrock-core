@@ -45,23 +45,21 @@ def test_public_api_surface_is_frozen():
 
     expected = {
         # Public sugar API
-        "App",
-        "Agent",
-        "LifecycleApp",
-        # Core primitives
-        "Runtime",
-        "ExecutionResult",
-        "Adapter",
-        "Capability",
-        "ChatCapability",
+        "App", "Agent", "LifecycleApp",
+        # Core runtime
+        "Runtime", "ExecutionResult",
+        "Adapter", "Capability", "ChatCapability",
+        # Stage protocol (Workflow not yet earned — see ADR-006)
+        "Stage", "StageResult",
+        # Event bus
+        "EventBus", "EventType", "RuntimeEvent",
+        "StageEvent", "PromptEvent", "RetrievalEvent",
+        "get_event_bus", "set_event_bus",
         # Extension points
-        "Connector",
-        "ConnectorError",
+        "Connector", "ConnectorError",
+        "Retriever", "MockRetriever", "Document",
         # Configuration
-        "BaseConfig",
-        "ConnectorConfig",
-        "ConfigurationError",
-        "LLMConfig",
+        "BaseConfig", "ConnectorConfig", "ConfigurationError", "LLMConfig",
     }
     assert set(bedrock_core.__all__) == expected
 
