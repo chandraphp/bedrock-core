@@ -1,0 +1,74 @@
+---
+title: bedrock-core + nb-ops-brain Architecture
+---
+flowchart TB
+    subgraph nb["nb-ops-brain (SRE application)"]
+        CLI["CLI\nnb-ops &quot;question&quot;"]
+        NbApp["NbOpsApp"]
+        SC["SplunkConnector\n(SRE domain logic)"]
+        SC2["JiraConnector\n(planned)"]
+        SC3["DynatraceConnector\n(planned)"]
+    end
+
+    subgraph bc["bedrock-core (domain-agnostic framework)"]
+        direction TB
+        LA["LifecycleApp\n(startup · shutdown · connector registry)"]
+        AG["Agent\nagent.ask(prompt)"]
+        RT["Runtime\n(composes Capabilities)"]
+        CAP["ChatCapability\n(+ future: Retrieve · Evaluate)"]
+        AD["Adapter\n(LLM boundary)"]
+
+        subgraph providers["Providers"]
+            MOCK["MockProvider\n(default · offline)"]
+            ANT["AnthropicProvider\n(Claude)"]
+            OAI["OpenAIProvider\n(GPT)"]
+            OLL["OllamaProvider\n(local · on-prem)"]
+        end
+
+        subgraph config["Configuration"]
+            CFG["LLMConfig\nConnectorConfig\nBaseConfig"]
+        end
+
+        subgraph ext["Extension points"]
+            CON["Connector\n(abstract base)"]
+            PLG["Plugin\n(planned · v0.2)"]
+            RET["Retriever\n(planned · v0.4)"]
+            PR["PromptRegistry\n(planned · v0.3)"]
+        end
+    end
+
+    subgraph infra["Infrastructure (external)"]
+        SPLUNK["Splunk"]
+        DYN["Dynatrace"]
+        JIRA["Jira / JSM"]
+        OLM["Ollama server\n(local GPU)"]
+        CLOUD["Cloud LLM APIs\n(Anthropic · OpenAI)"]
+    end
+
+    CLI --> NbApp
+    NbApp --> LA
+    NbApp --> SC
+    NbApp --> SC2
+    NbApp --> SC3
+    LA --> AG
+    AG --> RT
+    RT --> CAP
+    CAP --> AD
+    AD --> MOCK
+    AD --> ANT
+    AD --> OAI
+    AD --> OLL
+    SC -.->|subclasses| CON
+    SC --> SPLUNK
+    SC2 --> JIRA
+    SC3 --> DYN
+    OLL --> OLM
+    ANT --> CLOUD
+    OAI --> CLOUD
+
+    style bc fill:#1e3a5f,color:#ffffff,stroke:#4a90d9
+    style nb fill:#2d5a27,color:#ffffff,stroke:#5cb85c
+    style infra fill:#3d2b1f,color:#ffffff,stroke:#8b4513
+    style providers fill:#1a2f4a,color:#ffffff,stroke:#4a90d9
+    style config fill:#1a2f4a,color:#ffffff,stroke:#4a90d9
+    style ext fill:#1a2f4a,color:#ffffff,stroke:#4a90d9

@@ -73,3 +73,60 @@ Types: `feat`, `fix`, `docs`, `test`, `ci`, `refactor`, `chore`.
 ## Code of Conduct
 
 See [CODE_OF_CONDUCT.md](CODE_OF_CONDUCT.md).
+
+## Adding a new public API symbol
+
+Every PR that adds a new symbol to `bedrock_core.__all__` must include an
+**Evidence** section in the PR description answering:
+
+- How many independent consumers currently use this abstraction?
+- Were those consumers written independently, or did one follow from the other?
+- What would break if this symbol were removed in six months?
+
+A PR without this section will be returned with a review request, the same
+way a PR without tests would be. See [ADR-007](docs/adr/ADR-007-public-apis-are-promoted-not-invented.md).
+
+**Example — insufficient evidence (keep internal):**
+
+```
+## Evidence
+Consumers: RCAAgent (ops-brain)
+Independent implementations: None
+Recommendation: Keep in bedrock_core.workflow, not in __all__
+```
+
+**Example — sufficient evidence (promote):**
+
+```
+## Evidence
+Consumers: RCAAgent, EvaluationPipeline, ScanPipeline (all in ops-brain)
+Shared semantics: All three iterate stages, emit events, return typed result
+Recommendation: Promote Workflow to public API
+```
+
+## Promotion vs. Implementation
+
+New capabilities should normally begin as internal implementations within
+an application (such as ops-brain). Only after demonstrating reuse across
+at least two independent consumers should they be proposed for promotion
+into bedrock-core. Contributors are encouraged to optimize for evidence
+rather than early abstraction.
+
+The question to ask before opening a PR that touches `__all__`:
+
+> "Could this remain internal for one more release cycle?"
+
+If the answer is "yes," it should.
+
+## Reviewer checklist for public API changes
+
+These are architectural questions, not implementation questions. Reviewers
+should work through them for any PR that adds or changes a public symbol:
+
+- [ ] Is there at least one real consumer already using this?
+- [ ] Is the abstraction domain-independent (no SRE, security, or finance concepts)?
+- [ ] Could this remain internal for one more release without blocking anything?
+- [ ] Could this live in an external package rather than the core?
+- [ ] Is the promotion justified by evidence from multiple consumers?
+
+If the answer to any of the last three is "yes," request changes.

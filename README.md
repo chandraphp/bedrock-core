@@ -12,7 +12,7 @@
 >
 > A permanent name will be announced before the first stable release.
 
-[![CI](https://github.com/chandraphp/bedrock-core/actions/workflows/CI/badge.svg)](https://github.com/chandraphp/bedrock-core/actions/workflows/ci.yml)
+[![CI](https://github.com/chandraphp/bedrock-core/actions/workflows/ci.yml/badge.svg)](https://github.com/chandraphp/bedrock-core/actions/workflows/ci.yml)
 [![CodeQL](https://github.com/chandraphp/bedrock-core/actions/workflows/codeql.yml/badge.svg)](https://github.com/chandraphp/bedrock-core/actions/workflows/codeql.yml)
 [![Python](https://img.shields.io/badge/python-3.11+-blue)](https://pypi.org/project/bedrock-core/)
 [![License](https://img.shields.io/badge/license-Apache%202.0-blue)](LICENSE)
@@ -24,6 +24,16 @@
 
 A production-minded Python runtime for AI agents. Operability — metrics,
 traces, cost — is built in by default, not bolted on as a plugin.
+
+---
+
+## Documentation
+
+- [Design Principles](docs/DESIGN_PRINCIPLES.md) — read before any code
+- [Why bedrock-core?](docs/why-bedrock-core.md) — vs LangChain, LlamaIndex, CrewAI
+- [Public API](docs/public-api.md) — stable symbols and compatibility promise
+- [ADR index](docs/adr/) — architectural decision records
+- [Evidence Log](docs/decisions/evidence-log.md) — promotion ratio and candidates
 
 ---
 
@@ -159,3 +169,25 @@ loading, plugin interface (after first real plugin is built).
 ## License
 
 Apache-2.0 — see [LICENSE](LICENSE).
+
+---
+
+## Stabilization notice
+
+**bedrock-core is in a stabilization phase as of v0.3.1.**
+
+No new public API symbols will be added unless:
+
+1. Two or more independent applications independently need the same primitive
+2. A correctness bug requires a fix
+3. An ADR-007 evidence review approves the promotion
+
+This is intentional. The goal for this phase is to validate the existing
+primitives across real applications — not to expand the surface. See
+[ADR-007](docs/adr/ADR-007-public-apis-are-promoted-not-invented.md) and
+the [Promotion Candidates table](docs/decisions/evidence-log.md) for the
+governance process.
+
+The best signal that bedrock-core has found the right abstraction level is
+not a growing `__all__` — it's multiple real applications built without
+needing to change the framework.
